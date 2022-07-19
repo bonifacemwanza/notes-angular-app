@@ -6,6 +6,7 @@ import morgan from "morgan";
 import Controller from "./utils/interfaces/controller.interface";
 import ErrorMiddleware from "./middleware/error.middleware";
 import helmet from "helmet";
+import session from "express-session"
 
 class App {
     public express: Application;
@@ -29,11 +30,15 @@ class App {
         this.express.use(express.json());
         this.express.use(express.urlencoded({extended: false}));
         this.express.use(compression());
+        this.express.use(session({
+            secret:'angular_tutorial',
+            resave:true,
+            saveUninitialized: true
+        }));
     }
     private initialiseControllers(controllers: Controller[]): void {
          controllers.forEach(controller => {
              this.express.use('/api', controller.router);
-             console.log(`/api ${controller.router}`);
          });
     }
     private initialiseErrorHandling(): void {
@@ -44,7 +49,7 @@ class App {
 
        const connect = mongoose.connect(
            // `mongodb+srv://${MONGO_USER}:${MONGO_PASSWORD}${MONGO_PATH}`
-             `mongodb://localhost:27017`
+             `mongodb://root:password@localhost:27017`
         );
 
         console.log(connect)

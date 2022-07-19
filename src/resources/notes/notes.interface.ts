@@ -1,6 +1,7 @@
 import {Document} from 'mongoose'
-
+import Section from '../sections/sections.interface';
 export default interface Post extends Document {
-    title:string;
-    body: string
+    text:string;
+    titleId:Section["_id"];
+
 }

@@ -3,14 +3,16 @@ import Note from './notes.interface'
 
 const NotesSchema = new Schema(
     {
-        title: {
+        text: {
             type:String,
             required: true
-        }, 
-        body: {
-            type: String,
-            required: true
+        },
+        titleId: {
+            type:Schema.Types.ObjectId,
+            ref:"Sections",
+            required:true
         }
+      
     },
     {timestamps:true}
 );

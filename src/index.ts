@@ -4,6 +4,7 @@ require('module-alias/register');
 import validateEnv  from './utils/validateEnv';
 import App from './app';
 import PostController from './resources/notes/notes.controller';
+import SectionsController from './resources/sections/sections.controller'
 
 
 
@@ -11,7 +12,8 @@ import PostController from './resources/notes/notes.controller';
 validateEnv();
 
 const app = new App([
-    new PostController()
+    new PostController(),
+    new SectionsController()
 ], Number(process.env.PORT))
 
 app.listen()
